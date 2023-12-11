@@ -13,6 +13,18 @@ contract Marketplace is ReentrancyGuard {
     address payable public immutable feeAccount; // the account that receives fees
     uint public immutable feePercent; // the fee percentage on sales 
     uint public itemCount; 
+    uint public collectionCount;
+
+    struct Collection {
+        uint collectionId;
+        string name;
+        string description;
+        string location;
+        string time;
+        address seller;
+        uint firstItemId;
+        uint lastItemId;   
+    }
 
     struct Item {
         uint itemId;
@@ -25,11 +37,12 @@ contract Marketplace is ReentrancyGuard {
 
     // itemId -> Item
     mapping(uint => Item) public items;
+    mapping(uint => Collection) public collections; // collectionId -> array of itemIds
 
     event Offered(
-        uint itemId,
-        address indexed nft,
-        uint tokenId,
+        uint collectionId,   
+        address indexed nft, 
+        uint[] tokenIds,
         uint price,
         address indexed seller
     );
@@ -48,26 +61,45 @@ contract Marketplace is ReentrancyGuard {
     }
 
     // Make item to offer on the marketplace
-    function makeItem(IERC721 _nft, uint _tokenId, uint _price) external nonReentrant {
+    function makeItem(IERC721 _nft, uint[] memory _tokenIds, uint _price,
+                      string memory _name, string memory _description, 
+                      string memory _location, string  memory _time ) 
+                      external nonReentrant {
         require(_price > 0, "Price must be greater than zero");
-        // increment itemCount
-        itemCount ++;
-        // transfer nft
-        _nft.transferFrom(msg.sender, address(this), _tokenId);
-        // add new item to items mapping
-        items[itemCount] = Item (
-            itemCount,
-            _nft,
-            _tokenId,
-            _price,
-            payable(msg.sender),
-            false
-        );
+        require(_tokenIds.length > 0, "Quantity must be greater than zero");
+        collectionCount ++;
+        for(uint i = 0; i < _tokenIds.length; i++){
+            itemCount ++;
+            // transfer nft
+            _nft.transferFrom(msg.sender, address(this), _tokenIds[i]);
+            // add new item to items mapping
+            items[itemCount] = Item (
+                itemCount,
+                _nft,
+                _tokenIds[i],
+                _price,
+                payable(msg.sender),
+                false
+            );
+
+        }
+
+        collections[collectionCount] = Collection (
+                collectionCount,
+                _name,
+                _description,
+                _location,
+                _time,
+                msg.sender,
+                itemCount - _tokenIds.length + 1,
+                itemCount
+            );
+
         // emit Offered event
         emit Offered(
-            itemCount,
+            collectionCount,
             address(_nft),
-            _tokenId,
+            _tokenIds,
             _price,
             msg.sender
         );

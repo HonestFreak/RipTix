@@ -24,10 +24,11 @@ export default function MyPurchases({ marketplace, nft, account }) {
       let purchasedItem = {
         totalPrice,
         price: i.price,
-        itemId: i.itemId,
+        id: i.itemId,
         name: metadata.name,
         description: metadata.description,
-        image: metadata.image
+        image: metadata.image,
+        seller: i.seller
       }
       return purchasedItem
     }))
@@ -49,9 +50,16 @@ export default function MyPurchases({ marketplace, nft, account }) {
           <Row xs={1} md={2} lg={4} className="g-4 py-5">
             {purchases.map((item, idx) => (
               <Col key={idx} className="overflow-hidden">
-                <Card>
+                <Card className='effect'>
                   <Card.Img variant="top" src={item.image} />
-                  <Card.Footer>{ethers.utils.formatEther(item.totalPrice)} ETH</Card.Footer>
+                  <Card.Body>
+                    <Card.Title>{item.name}</Card.Title>
+                    <Card.Text>{item.description}</Card.Text>
+                    <hr/>
+                    <Card.Text>ticket id #{parseInt(item.id._hex)}</Card.Text>
+                    <Card.Text>{item.seller}</Card.Text>
+                  </Card.Body>
+                  {/* <Card.Footer>{ethers.utils.formatEther(item.totalPrice)} XRP</Card.Footer> */}
                 </Card>
               </Col>
             ))}

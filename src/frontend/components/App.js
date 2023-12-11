@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Navigation from './Navbar';
 import Home from './Home.js'
+import EventPage from './EventPage.js'
 import Create from './Create.js'
 import MyListedItems from './MyListedItems.js'
 import MyPurchases from './MyPurchases.js'
@@ -67,6 +68,9 @@ function App() {
             <Routes>
               <Route path="/" element={
                 <Home marketplace={marketplace} nft={nft} />
+              } />
+              <Route path="/event" element={
+                <EventPage marketplace={marketplace} nft={nft}  />
               } />
               <Route path="/create" element={
                 <Create marketplace={marketplace} nft={nft} />
