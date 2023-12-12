@@ -1,6 +1,6 @@
 {
-  "name": "starter_kit",
-  "version": "0.2.0",
+  "name": "RIPTIX",
+  "version": "1",
   "private": false,
   "dependencies": {
     "@babel/preset-react": "^7.16.7",
