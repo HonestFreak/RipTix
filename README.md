@@ -40,7 +40,8 @@ RipTix is a decentralized ticketing platform that leverages the power of Non-Fun
    REACT_APP_PINATA_SECRET_API_KEY=
    REACT_APP_PINATA_SECRET_ACCESS_TOKEN=
    ```
-   Add you 12 word phrase in deploy.js (if you want to deploye your own smart contract)
+   Add your 12 word phrase in deploy.js (if you want to deploye your own smart contract)
+   
    ![Alt text](image.png)
 
 3. **Boot up Local Development Blockchain**
