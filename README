@@ -1,7 +1,9 @@
 # RipTix - Decentralized Ticketing with NFTs
+![Alt text](<1 (1).png>)
 
 ## Overview
 RipTix is a decentralized ticketing platform that leverages the power of Non-Fungible Tokens (NFTs) on the XRP EVM compatible chain. This project aims to revolutionize the event ticketing industry by introducing transparency, security, and uniqueness through blockchain technology.
+![Alt text](2.png)
 
 ## Technology Stack & Tools
 - Solidity (Smart Contract Development)
