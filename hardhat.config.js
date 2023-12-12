@@ -10,7 +10,7 @@ module.exports = {
       url: "https://rpc-evm-sidechain.xrpl.org",
       chainId: 1440002,
       accounts: {
-        mnemonic: ""
+        mnemonic: ""  // mnemonic of the account that will deploy the contracts
       }
     },
   },

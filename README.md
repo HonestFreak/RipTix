@@ -29,11 +29,19 @@ RipTix is a decentralized ticketing platform that leverages the power of Non-Fun
    $ git clone https://github.com/your-username/RipTix.git
    ```
 
-2. **Install Dependencies**
+2. **Install Dependencies & Add Keys**
    ```bash
    $ cd RipTix
    $ npm install
    ```
+   Don't forget to add .env file
+   ```bash
+   REACT_APP_PINATA_API_KEY=
+   REACT_APP_PINATA_SECRET_API_KEY=
+   REACT_APP_PINATA_SECRET_ACCESS_TOKEN=
+   ```
+   Add you 12 word phrase in deploy.js (if you want to deploye your own smart contract)
+   ![Alt text](image.png)
 
 3. **Boot up Local Development Blockchain**
    ```bash
@@ -41,7 +49,15 @@ RipTix is a decentralized ticketing platform that leverages the power of Non-Fun
    $ npx hardhat node
    ```
 
-4. **Testing using Hardhat on Metamask**
+4. **Local Testing**
+
+   ***For Testing Smart Contracts***
+   - Edit the test file in src/backend/test/NFTMarketplace.test.js
+    ```bash
+   $ npx hardhat test
+   ```
+
+   ***For HardHat Blochain Local Testing***
    - Copy the private key of the addresses and import them into Metamask.
    - Connect Metamask to the Hardhat blockchain using the network `127.0.0.1:8545`.
    - If Hardhat is not added to the list of networks on Metamask, add it by entering "Hardhat" for the network name, "http://127.0.0.1:8545" for the new RPC URL, and "31337" for the chain ID.
@@ -51,17 +67,12 @@ RipTix is a decentralized ticketing platform that leverages the power of Non-Fun
    $ npx hardhat run src/backend/scripts/deploy.js --network xrplEvmSidechain
    ```
 
-6. **Setting Metamask for the Sidechain**
+6. **Setting Metamask for the XRP EVM Sidechain**
 Network Name : XRPL EVM Sidechain
 New RPC URL : https://rpc-evm-sidechain.xrpl.org
 Chain ID : 1440002
 Currency Symbol : XRP
-Block Explorer : https://evm-sidechain.xrpl.org
-
-**Running Smart Contract Tests**
-   ```bash
-   $ npx hardhat test
-   ```
+Block Explorer : https://evm-sidechain.xrpl.org  
 
 7. **Launch Frontend**
    ```bash
